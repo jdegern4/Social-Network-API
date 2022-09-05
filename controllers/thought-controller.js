@@ -26,7 +26,7 @@ const thoughtController = {
       .then((dbThoughtData) => {
         return User.findOneAndUpdate(
           { username: body.username },
-          { $push: { Thoughts: dbThoughtData } },
+          { $push: { thoughts: dbThoughtData } },
           { new: true }
         );
       })
@@ -91,7 +91,7 @@ const thoughtController = {
   deleteReaction({ params, body }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
-      { $pull: { reactions: { reactionId: body.reactionId } } },
+      { $pull: { reactions: { reactionId: params.reactionId } } },
       {
         new: true,
         runValidators: true,
